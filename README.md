@@ -33,7 +33,6 @@ if mse <= lower_5_percent_mse:
 else:
     equivalency_validated = False
 
-## End of Part 0
 ## Part 1: Data Processing and Model Training/Evaluating for 2017-2019
 
 ### Data Collection
@@ -60,8 +59,6 @@ result2019 = raw_result2017_2019 + (psrc2019 - psrc2017)
 
 ### Validation with CMS2019
 validation_result2019 = validate_with_cms(result2019)
-
-## End of Part 1
 
 
 ## Part 2: Data Processing and Model Training/Evaluating for 2019-2021
@@ -91,8 +88,6 @@ result2021 = raw_result2019_2021 + (psrc2021 - psrc2019)
 
 ### Validation with RKT2020
 validation_result2021 = validate_with_rkt(result2021)
-
-## End of Part 2
 
 # Execution flow of our project
 
