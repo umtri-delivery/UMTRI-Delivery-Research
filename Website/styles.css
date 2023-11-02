@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+h1 {
+    color: #333;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column; /* Arrange rows vertically */
+    align-items: center; /* Horizontally center rows */
+}
+
+.row {
+    display: flex;
+    align-items: center; /* Vertically center elements within each row */
+    margin: 10px 0; /* Add vertical spacing between rows */
+}
+
+.slider {
+    width: 150px; /* Set a fixed width for all sliders */
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    border-radius: 10px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+/* Change the appearance of the sliders when active */
+.slider:hover {
+    opacity: 1;
+}
+
+/* Customize the appearance of the slider thumb */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+}
+
+.row input[type="checkbox"] {
+    margin-right: 10px; /* Adjust the value as needed for the desired spacing */
+}
+
+.editable-text-field {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#result {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#value {
+    font-weight: bold;
+}
+
+.slider:disabled {
+    background: #f0f0f0; /* Change the background color */
+    cursor: not-allowed; /* Set the cursor to "none" to make it invisible */
+    opacity: 0.5; /* Reduce opacity to make it look disabled */
+}
+
+.slider:disabled::-webkit-slider-thumb {
+    display: none; /* Hide the thumb in WebKit browsers (e.g., Chrome, Safari) */
+}
+
+.slider:disabled::-moz-range-thumb {
+    display: none; /* Hide the thumb in Mozilla Firefox */
+}
