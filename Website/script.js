@@ -154,9 +154,7 @@ function updateColumnOptions() {
             const headers = csvData.split('\n')[0].split(',');
 
             // Clear existing options
-            while (columnSelect.firstChild) {
-                columnSelect.removeChild(columnSelect.firstChild);
-            }
+            columnSelect.innerHTML = '';
 
             // Populate the column dropdown with options
             headers.forEach(header => {
@@ -172,8 +170,9 @@ function updateColumnOptions() {
         .catch(error => console.error('Error fetching CSV:', error));
 }
 
+
 function updateColumnResult() {
-    const selectedColumn = columnSelect.value;
+    const selectedColumns = Array.from(columnSelect.selectedOptions).map(option => option.value);
 
     // Fetch the CSV file and update the column result value
     fetch(areaToCTPath[areaSelect.value])
@@ -181,26 +180,35 @@ function updateColumnResult() {
         .then(csvData => {
             const rows = csvData.split('\n');
             const headers = rows[0].split(',');
+            const value1 = rows[1].split(',');
+            const value2 = rows[2].split(',');
+            const value3 = rows[3].split(',');
 
-            // Find the index of the selected column
-            const columnIndex = headers.indexOf(selectedColumn);
+            // Initialize variables for sum calculation
+            let sumResultRow1 = 0;
+            let sumResultRow2 = 0;
+            let sumResultPop = 0;
 
-            if (columnIndex !== -1 && rows.length > 1) {
-                const firstDataRow = rows[1].split(',')[columnIndex];
-                const secondDataRow = rows[2].split(',')[columnIndex];
-                const thirdDataRow = rows[3].split(',')[columnIndex];
-                const roundedfirstDataRow = Math.round(firstDataRow);
-                const roundedsecondDataRow = Math.round(secondDataRow);
-                const result = "("+roundedfirstDataRow+", "+roundedsecondDataRow+")"
-                columnResultValue.textContent = result;
-                columnResultPopValue.textContent = thirdDataRow;
-            } else {
-                columnResultValue.textContent = '-';
-                columnResultPopValue.textContent = '-';
-            }
+            selectedColumns.forEach(selectedColumn => {
+                const columnIndex = headers.indexOf(selectedColumn);
+                if (columnIndex !== -1) {
+                    sumResultRow1 += parseFloat(value1[columnIndex]) || 0; // Sum for row 1
+                    sumResultRow2 += parseFloat(value2[columnIndex]) || 0; // Sum for row 2
+                    sumResultPop += parseFloat(value3[columnIndex]) || 0; // Sum for population
+                }
+            });
+
+            // Display the sum of selected columns for row 1 and row 2
+            const resultRow1 = Math.round(sumResultRow1);
+            const resultRow2 = Math.round(sumResultRow2);
+            const resultPop = Math.round(sumResultPop);
+
+            columnResultValue.textContent = `(${resultRow1}, ${resultRow2})`;
+            columnResultPopValue.textContent = resultPop;
         })
         .catch(error => console.error('Error fetching CSV:', error));
 }
+
 
 function handleYearChange() {
     // Get the selected year from the dropdown

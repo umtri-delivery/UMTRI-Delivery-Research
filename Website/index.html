@@ -118,10 +118,16 @@
         <p id="result">Result: <span id="value">-</span></p>
         <p id="population">Selected Profile Population in this CBSA: <span id="pop_value">-</span></p>
     </div>
+    <div class="spacer"></div>
     <div class="dropdown">
-        <label for="column-select">Select Census Tract:</label>
-        <select id="column-select"></select>
+        <div>
+            <label for="column-select">Select Census Tract (Press Shift or Ctrl to select multiple options):</label>
+        </div>
+        <div>
+            <select id="column-select" multiple size="30"></select>
+        </div>
     </div>
+    
     <div class="column-result">
         <p id="column-value">Total Delivery (Interval Estimate): <span id="column-result-value">-</span></p>
     </div>

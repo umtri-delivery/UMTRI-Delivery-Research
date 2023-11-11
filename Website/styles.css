@@ -90,3 +90,7 @@ h1 {
 .slider:disabled::-moz-range-thumb {
     display: none; /* Hide the thumb in Mozilla Firefox */
 }
+
+.spacer {
+    height: 50px; /* Adjust the height as needed */
+}
