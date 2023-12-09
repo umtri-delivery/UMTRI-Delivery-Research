@@ -67,15 +67,24 @@ for (let i = 1; i <= 6; i++) {
 function updateResult() {
     // Get the selected area from the dropdown
     const selectedArea = document.getElementById('area-select').value;
+    const selectedMethod = document.getElementById('method-select').value;
 
     //const selectedArea = areaSelect.value;
     const selectedAreaText = areaSelect.options[areaSelect.selectedIndex].text;
 
     // Generate file paths for 2019 and 2021 based on the selected area
-    areaToCsvPath2019[selectedArea] = `Result/${selectedAreaText}_prediction.csv`;
-    areaToCTPath2019[selectedArea] = `Result/${selectedAreaText}_CTresult.csv`;
-    areaToCsvPath2021[selectedArea] = `Result/${selectedAreaText}_prediction_2021.csv`;
-    areaToCTPath2021[selectedArea] = `Result/${selectedAreaText}_CTresult_2021.csv`;
+    if (selectedMethod === 'nn'){
+        areaToCsvPath2019[selectedArea] = `Result/${selectedAreaText}_prediction_nn.csv`;
+        areaToCTPath2019[selectedArea] = `Result/${selectedAreaText}_CTresult_nn.csv`;
+        areaToCsvPath2021[selectedArea] = `Result/${selectedAreaText}_prediction_2021_nn.csv`;
+        areaToCTPath2021[selectedArea] = `Result/${selectedAreaText}_CTresult_2021_nn.csv`;
+    }
+    else{
+        areaToCsvPath2019[selectedArea] = `Result/${selectedAreaText}_prediction.csv`;
+        areaToCTPath2019[selectedArea] = `Result/${selectedAreaText}_CTresult.csv`;
+        areaToCsvPath2021[selectedArea] = `Result/${selectedAreaText}_prediction_2021.csv`;
+        areaToCTPath2021[selectedArea] = `Result/${selectedAreaText}_CTresult_2021.csv`;
+    }
 
     const selectedYear = document.getElementById('year-select').value;
 
@@ -211,25 +220,13 @@ function updateColumnResult() {
 
 
 function handleYearChange() {
-    // Get the selected year from the dropdown
-    const selectedYear = document.getElementById('year-select').value;
-
-    if (selectedYear === '2019') {
-        areaToCsvPath = areaToCsvPath2019;
-        areaToCTPath = areaToCTPath2019;
-    } else if (selectedYear === '2021') {
-        areaToCsvPath = areaToCsvPath2021;
-        areaToCTPath = areaToCTPath2021;
-    }
-
-    // Update the result based on the selected year and settings
     updateResult();
     updateColumnOptions();
-    // Add any other updates you need to perform here.
 }
 
 // Add an event listener to the year select dropdown
 const yearSelect = document.getElementById('year-select');
+const methodSelect = document.getElementById('method-select');
 const areaSelect = document.getElementById('area-select');
 const columnSelect = document.getElementById('column-select');
 const columnResultValue = document.getElementById('column-result-value');
@@ -242,6 +239,8 @@ const areaToCTPath2021 = {};
 // You can use these objects as needed when the area selection changes
 
 yearSelect.addEventListener('change', handleYearChange);
+
+methodSelect.addEventListener('change', handleYearChange);
 
 areaSelect.addEventListener('change', updateResult); // Update the result when the area is changed
 
